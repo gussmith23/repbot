@@ -24,7 +24,6 @@ class DbInterface:
 		cur = self.conn.cursor()
 		
 		cur.execute("INSERT INTO users (user_id, reputation) VALUES (?,?)", 
-									userid, 
-									startingrep)
+									(userid, startingrep))
 		
 		self.conn.commit()
