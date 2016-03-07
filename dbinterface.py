@@ -27,3 +27,9 @@ class DbInterface:
 									(userid, startingrep))
 		
 		self.conn.commit()
+		
+	def getrep(self, userid):
+		cur = self.conn.cursor()
+		
+		cur.execute("SELECT reputation FROM users WHERE user_id = ?", 
+									(userid))
