@@ -12,7 +12,7 @@ class DbInterface:
 		cur.execute("CREATE TABLE IF NOT EXISTS users " +
 								"(user_id INTEGER, " +
 								"reputation INTEGER, " +
-								"CONSTRAINT users_pk PRIMARY KEY user_id)")
+								"CONSTRAINT users_pk PRIMARY KEY (user_id))")
 		
 		# don't forget to commit!
 		self.conn.commit()
@@ -22,3 +22,9 @@ class DbInterface:
 		
 	def adduser(self, userid, startingrep):
 		cur = self.conn.cursor()
+		
+		cur.execute("INSERT INTO users (user_id, reputation) VALUES (?,?)", 
+									userid, 
+									startingrep)
+		
+		self.conn.commit()
