@@ -36,3 +36,10 @@ class DbInterface:
 									(userid,))
 									
 		return cur.fetchone()[0]
+		
+	def setrep(self, userid, newrep):
+		cur = self.conn.cursor()
+		
+		cur.execute("UPDATE users SET reputation = ? WHERE user_id = ?",
+									(userid,))
+									
