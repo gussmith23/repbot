@@ -23,10 +23,18 @@ class DbInterface:
 	def adduser(self, userid, startingrep):
 		cur = self.conn.cursor()
 		
-		cur.execute("INSERT INTO users (user_id, reputation) VALUES (?,?)", 
-									(userid, startingrep))
+		added = False
 		
-		self.conn.commit()
+		try:
+			cur.execute("INSERT INTO users (user_id, reputation) VALUES (?,?)", 
+										(userid, startingrep))
+			self.conn.commit()
+			added = True
+		except sqlite3.IntegrityError:
+			added = False
+			
+		return added	
+		
 		
 	def getrep(self, userid):
 		cur = self.conn.cursor()
