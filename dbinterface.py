@@ -1,5 +1,6 @@
 import sqlite3
 import os
+import time
 
 class DbInterface:
 	def __init__(self, db_path):
@@ -22,14 +23,14 @@ class DbInterface:
 	def close(self):
 		self.conn.close()
 		
-	def adduser(self, userid, startingrep):
+	def adduser(self, userid, username, startingrep):
 		cur = self.conn.cursor()
 		
 		added = False
 		
 		try:
-			cur.execute("INSERT INTO users (user_id, reputation) VALUES (?,?)", 
-										(userid, startingrep))
+			cur.execute("INSERT INTO users (user_id, reputation, username, time_joined) VALUES (?,?,?,?)", 
+										(userid, startingrep, username, int(time.time())))
 			self.conn.commit()
 			added = True
 		except sqlite3.IntegrityError:
