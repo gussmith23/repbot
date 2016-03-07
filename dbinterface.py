@@ -44,4 +44,10 @@ class DbInterface:
 									(newrep,userid))
 									
 		self.conn.commit()
+		
+	def incrementrep(self, userid, amount):
+		cur = self.conn.cursor()
+		
+		self.setrep(userid, self.getrep(userid) + amount)
+		
 									
