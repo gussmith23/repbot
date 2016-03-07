@@ -18,6 +18,10 @@ dbinterface = DbInterface(config['database']['db_path'])
 
 ### EVENT HANDLERS 
 
+@bot.message_handler(commands = ['register'])
+def user_register(message):
+	print("not implemented")
+
 # we're searching for '+rep or -rep' with an optional number after it.
 @bot.message_handler(regexp = "[\+\-]rep ?[0-9]* ")
 def handle_plus_minus_rep_message(message):
@@ -25,6 +29,7 @@ def handle_plus_minus_rep_message(message):
 	print(message)
 	usernames = re.findall('@[a-zA-Z0-9]+', message.text)
 	
+
 
 ###
 
