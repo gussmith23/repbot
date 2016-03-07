@@ -12,6 +12,8 @@ class DbInterface:
 		cur.execute("CREATE TABLE IF NOT EXISTS users " +
 								"(user_id INTEGER, " +
 								"reputation INTEGER, " +
+								"username TEXT," +
+								"time_joined INTEGER," +
 								"CONSTRAINT users_pk PRIMARY KEY (user_id))")
 		
 		# don't forget to commit!
