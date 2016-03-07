@@ -41,5 +41,7 @@ class DbInterface:
 		cur = self.conn.cursor()
 		
 		cur.execute("UPDATE users SET reputation = ? WHERE user_id = ?",
-									(userid,))
+									(newrep,userid))
+									
+		self.conn.commit()
 									
