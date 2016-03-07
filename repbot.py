@@ -20,7 +20,14 @@ dbinterface = DbInterface(config['database']['db_path'])
 
 @bot.message_handler(commands = ['register'])
 def user_register(message):
-	print("not implemented")
+	added = dbinterface.adduser(userid = message.from_user.id,
+															startingrep = 100,
+															username = message.from_user.username)
+	
+	if added:
+		bot.reply_to(message, "You are now registered to send and recieve reputation!")
+	else:
+		bot.reply_to(message, "You were already registered!")
 
 # we're searching for '+rep or -rep' with an optional number after it.
 @bot.message_handler(regexp = "[\+\-]rep ?[0-9]* ")
