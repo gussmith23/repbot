@@ -31,5 +31,8 @@ class DbInterface:
 	def getrep(self, userid):
 		cur = self.conn.cursor()
 		
+		# note the use of the comma to make it a one-element list
 		cur.execute("SELECT reputation FROM users WHERE user_id = ?", 
-									(userid))
+									(userid,))
+									
+		return cur.fetchone()[0]
