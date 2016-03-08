@@ -1,4 +1,5 @@
 repbot.cfg
 __pycache__
 repbot.db
-repbot.db repbot.db-journal
+repbot.db 
+repbot.db-journal
