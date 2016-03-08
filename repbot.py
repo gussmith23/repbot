@@ -29,8 +29,10 @@ def user_register(message):
 	
 	if added:
 		bot.reply_to(message, "You are now registered to send and recieve reputation!")
+		print("User added.")
 	else:
 		bot.reply_to(message, "You were already registered!")
+		print("User was already registered.")
 
 # we're searching for '+rep or -rep' with an optional number after it.
 @bot.message_handler(regexp = "[\+\-]rep ?[0-9]* ")
