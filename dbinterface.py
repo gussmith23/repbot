@@ -145,5 +145,5 @@ class DbInterface:
 			# finally, commit.
 			self.conn.commit()
 			
-			q.task_done()
+			self.q.task_done()
 				
