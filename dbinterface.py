@@ -74,7 +74,7 @@ class DbInterface:
 		self.conn.commit()
 		
 		while True:
-			query = q.get()
+			query = self.q.get()
 			if query is None: continue
 			
 			# query structure will be a tuple with the following items:
@@ -104,15 +104,15 @@ class DbInterface:
 			# handle error case and exit if error 
 			if error:
 				query[2].extend([False])
-				q.task_done()
+				self.q.task_done()
 				continue
 					
 			# if there's no return, we signal with "None"
 			all = cur.fetchall()
 			if (len(all) == 0): 
-				q[2].extend([None])
+				query[2].extend([None])
 			else:	
-				q[2].extend(all)
+				query[2].extend(all)
 			
 			q.task_done()
 				
