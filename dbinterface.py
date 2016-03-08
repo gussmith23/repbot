@@ -8,9 +8,9 @@ class DbInterface:
 	def __init__(self, db_path):
 				
 		self.q = queue.Queue()
-		
+				
 		# setup&start thread that will handle db accesses
-		t = threading.Thread(target = worker)
+		t = threading.Thread(target = self.worker, args=(db_path,))
 		t.start()
 				
 	def adduser(self, userid, username, startingrep):
@@ -82,7 +82,7 @@ class DbInterface:
 	def incrementrep(self, userid, amount):
 		self.setrep(userid, self.getrep(userid) + amount)
 		
-	def worker(self):
+	def worker(self,db_path):
 	
 		# open connection. this object should ONLY be touched
 		# by this worker loop.
