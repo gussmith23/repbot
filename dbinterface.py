@@ -44,7 +44,25 @@ class DbInterface:
 		cur.execute("SELECT reputation FROM users WHERE user_id = ?", 
 									(userid,))
 									
-		return cur.fetchone()[0]
+		returnlist = []
+		
+		query = ("SELECT reputation FROM users WHERE user_id = ?", 
+									(userid,),
+									returnlist)
+									
+		self.q.put(query)
+		
+		# block until worker processes our query.
+		while len(returnlist) == 0:
+			pass
+			
+		returnval = False
+		if returnlist[0] == False:
+			returnval = False
+		else:
+			returnval = returnlist[0][0]
+			
+		return returnval
 		
 	def setrep(self, userid, newrep):
 		cur = self.conn.cursor()
