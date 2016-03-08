@@ -14,17 +14,25 @@ class DbInterface:
 		t.start()
 				
 	def adduser(self, userid, username, startingrep):
-		cur = self.conn.cursor()
 		
 		added = False
 		
-		try:
-			cur.execute("INSERT INTO users (user_id, reputation, username, time_joined) VALUES (?,?,?,?)", 
-										(userid, startingrep, username, int(time.time())))
-			self.conn.commit()
-			added = True
-		except sqlite3.IntegrityError:
+		returnlist = []
+		
+		query = ("INSERT INTO users (user_id, reputation, username, time_joined) VALUES (?,?,?,?)", 
+							(userid, startingrep, username, int(time.time())),
+							returnlist)
+							
+		self.q.put(query)
+		
+		# block until worker processes our query.
+		while len(returnlist) == 0:
+			pass
+			
+		if returnlist[0] == False:
 			added = False
+		else:
+			added = True
 			
 		return added	
 		
