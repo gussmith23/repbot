@@ -41,8 +41,6 @@ def user_register(message):
 # we're searching for '+rep or -rep' with an optional number after it.
 @bot.message_handler(regexp = "[\+\-]rep ?[0-9]* ", func = lambda m: m.date >= time_started)
 def handle_plus_minus_rep_message(message):
-	print("not implemented")
-	print(message)
 	usernames = re.findall('@[a-zA-Z0-9]+', message.text)
 	
 
