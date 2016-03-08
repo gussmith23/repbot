@@ -11,6 +11,7 @@ class DbInterface:
 				
 		# setup&start thread that will handle db accesses
 		t = threading.Thread(target = self.worker, args=(db_path,))
+		t.daemon = True			# allows it to die with main thread
 		t.start()
 				
 	def adduser(self, userid, username, startingrep):
