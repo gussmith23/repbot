@@ -80,8 +80,6 @@ class DbInterface:
 			return True
 		
 	def incrementrep(self, userid, amount):
-		cur = self.conn.cursor()
-		
 		self.setrep(userid, self.getrep(userid) + amount)
 		
 	def worker(self):
