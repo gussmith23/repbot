@@ -60,12 +60,24 @@ class DbInterface:
 		return returnval
 		
 	def setrep(self, userid, newrep):
-		cur = self.conn.cursor()
+	
+		returnlist = []
 		
-		cur.execute("UPDATE users SET reputation = ? WHERE user_id = ?",
-									(newrep,userid))
+		query = ("UPDATE users SET reputation = ? WHERE user_id = ?",
+									(newrep,userid),
+									returnlist)
 									
-		self.conn.commit()
+		self.q.put(query)
+		
+		# block until worker processes our query.
+		# TODO do we really need to, if there's no return value?
+		while len(returnlist) == 0:
+			pass
+			
+		if returnlist[0] == False:
+			return False
+		else:
+			return True
 		
 	def incrementrep(self, userid, amount):
 		cur = self.conn.cursor()
