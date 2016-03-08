@@ -45,13 +45,13 @@ def handle_plus_minus_rep_message(message):
 	relevant_section = re.search("[\+\-]rep ?[0-9]* ", message.text).group()
 
 	## finding number
-	number_match = re.search("[0-9]*", relevant_section)
+	number_match = re.search("[0-9]+", relevant_section)
 	number_to_increment = 1
 	if number_match != None:
 		number_to_increment = int(number_match.group())
 	if relevant_section[0] == "-":
 		number_to_increment = -1 * number_to_increment
-	print("Number found: {}".format(number_to_increment))
+	print("Number found: {}".format(number_to_increment))	
 	##
 	
 	## finding usernames
