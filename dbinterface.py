@@ -12,10 +12,7 @@ class DbInterface:
 		# setup&start thread that will handle db accesses
 		t = threading.Thread(target = worker)
 		t.start()
-		
-	def close(self):
-		self.conn.close()
-		
+				
 	def adduser(self, userid, username, startingrep):
 		cur = self.conn.cursor()
 		
@@ -113,6 +110,9 @@ class DbInterface:
 				query[2].extend([None])
 			else:	
 				query[2].extend(all)
+				
+			# finally, commit.
+			self.conn.commit()
 			
 			q.task_done()
 				
