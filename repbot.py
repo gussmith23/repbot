@@ -51,6 +51,7 @@ def handle_plus_minus_rep_message(message):
 		number_to_increment = int(number_match.group())
 	if relevant_section[0] == "-":
 		number_to_increment = -1 * number_to_increment
+	print("Number found: {}".format(number_to_increment))
 	##
 	
 	## finding usernames
