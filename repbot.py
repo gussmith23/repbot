@@ -20,6 +20,9 @@ dbinterface = DbInterface(config['database']['db_path'])
 
 @bot.message_handler(commands = ['register'])
 def user_register(message):
+	
+	print("Attempting to add user {}.".format(message.from_user.username))
+	
 	added = dbinterface.adduser(userid = message.from_user.id,
 															startingrep = 100,
 															username = message.from_user.username)
