@@ -18,6 +18,8 @@ dbinterface = DbInterface(config['database']['db_path'])
 
 # this is used to filter out messages from before the bot started
 time_started = int(time.time())
+
+rep_command_regex = "[\+\-][0-9]* ?rep ?[0-9]*"
 ### 
 
 ### EVENT HANDLERS 
@@ -39,10 +41,10 @@ def user_register(message):
 		print("User was already registered.")
 
 # we're searching for '+rep or -rep' with an optional number after it.
-@bot.message_handler(regexp = "[\+\-]rep ?[0-9]*", func = lambda m: m.date >= time_started)
+@bot.message_handler(regexp = rep_command_regex, func = lambda m: m.date >= time_started)
 def handle_plus_minus_rep_message(message):
 
-	relevant_section = re.search("[\+\-]rep ?[0-9]*", message.text).group()
+	relevant_section = re.search(rep_command_regex, message.text).group()
 
 	## finding number
 	number_match = re.search("[0-9]+", relevant_section)
