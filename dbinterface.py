@@ -82,7 +82,11 @@ class DbInterface:
 			return True
 		
 	def incrementrep(self, username, amount):
-		self.setrep(username, self.getrep(username) + amount)
+		currentrep = self.getrep(username)
+		if currentrep == False:
+			return False
+		self.setrep(username, currentrep + amount)
+		return True
 		
 	def worker(self,db_path):
 	
