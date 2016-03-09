@@ -38,12 +38,12 @@ class DbInterface:
 		return added	
 		
 		
-	def getrep(self, userid):
+	def getrep(self, username):
 	
 		returnlist = []
 		
-		query = ("SELECT reputation FROM users WHERE user_id = ?", 
-									(userid,),
+		query = ("SELECT reputation FROM users WHERE username = ?", 
+									(username,),
 									returnlist)
 									
 		self.q.put(query)
@@ -60,12 +60,12 @@ class DbInterface:
 			
 		return returnval
 		
-	def setrep(self, userid, newrep):
+	def setrep(self, username, newrep):
 	
 		returnlist = []
 		
-		query = ("UPDATE users SET reputation = ? WHERE user_id = ?",
-									(newrep,userid),
+		query = ("UPDATE users SET reputation = ? WHERE username = ?",
+									(newrep,username),
 									returnlist)
 									
 		self.q.put(query)
@@ -80,8 +80,8 @@ class DbInterface:
 		else:
 			return True
 		
-	def incrementrep(self, userid, amount):
-		self.setrep(userid, self.getrep(userid) + amount)
+	def incrementrep(self, username, amount):
+		self.setrep(username, self.getrep(username) + amount)
 		
 	def worker(self,db_path):
 	
