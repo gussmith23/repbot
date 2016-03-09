@@ -53,7 +53,8 @@ class DbInterface:
 			pass
 			
 		returnval = False
-		if returnlist[0] == False:
+		# TODO what should the return be here?
+		if returnlist[0] == None or returnlist[0] == False:
 			returnval = False
 		else:
 			returnval = returnlist[0][0]
