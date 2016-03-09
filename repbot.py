@@ -36,6 +36,11 @@ def user_register(message):
 def user_register(message):
 	
 	print("Attempting to add user {}.".format(message.from_user.username))
+		bot.reply_to(message, "Please add a username before registering.")
+		print("User needed username.")
+
+	if message.from_user.username == None or message.from_user.username == "":
+		bot
 	
 	added = dbinterface.adduser(userid = message.from_user.id,
 															startingrep = 100,
