@@ -78,8 +78,9 @@ def handle_plus_minus_rep_message(message):
 
 	for username in usernames:	
 		if number_to_increment >= 0:
-			dbinterface.incrementrep(username, number_to_increment)
-			dbinterface.incrementrep(message.from_user.username, -1*number_to_increment)
+			# add rep to reciever, take rep from giver (but only if add rep succeeds!)
+			if dbinterface.incrementrep(username, number_to_increment):
+				dbinterface.incrementrep(message.from_user.username, -1*number_to_increment)
 		else:
 			dbinterface.incrementrep(username, number_to_increment)
 
