@@ -67,7 +67,7 @@ def handle_plus_minus_rep_message(message):
 		
 	## finding number
 	# this will find the FIRST number in the message
-	number_match = re.search("[0-9]+", relevant_section)
+	number_match = re.search("[0-9]{1-3}", relevant_section)
 	number_to_increment = 1
 	if number_match != None:
 		number_to_increment = int(number_match.group())
