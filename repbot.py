@@ -25,7 +25,7 @@ rep_command_regex = "[\+\-][0-9]* ?rep ?[0-9]*"
 ### EVENT HANDLERS 
 @bot.message_handler(commands = ['getrep'], func = lambda m: m.date >= time_started)
 def user_register(message):
-	rep = getrep(message.from_user.username)
+	rep = dbinterface.getrep(message.from_user.username)
 	
 	if rep == False:
 		bot.reply_to(message, "You are not registered! Have you used the 'register' command?")
