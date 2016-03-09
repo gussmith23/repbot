@@ -60,10 +60,15 @@ def handle_plus_minus_rep_message(message):
 	## finding usernames
 	usernames = re.findall('@[a-zA-Z0-9]+', message.text)
 	usernames = [name[1:] for name in usernames]
-	
 	print("Usernames found: {}".format(usernames))
 	##
 
+	for username in usernames:	
+		if number_to_increment >= 0:
+			dbinterface.incrementrep(username, number_to_increment)
+			dbinterface.incrementrep(message.from_user.username, -1*number_to_increment)
+		else:
+			dbinterface.incrementrep(username, number_to_increment)
 
 ###
 
