@@ -58,7 +58,13 @@ def user_register(message):
 def handle_plus_minus_rep_message(message):
 
 	relevant_section = re.search(rep_command_regex, message.text).group()
-
+	
+	# check if sending user is registered.
+	if dbinterface.getrep(message.from_user.username) == False:
+		bot.reply_to(message, "Please register using the 'register' command first.")
+		print("Unregistered user {} tried to use +rep".format(message.from_user.username))
+		return
+		
 	## finding number
 	# this will find the FIRST number in the message
 	number_match = re.search("[0-9]+", relevant_section)
