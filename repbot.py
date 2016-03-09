@@ -40,6 +40,7 @@ def user_register(message):
 	if message.from_user.username == None or message.from_user.username == "":
 		bot.reply_to(message, "Please add a username before registering.")
 		print("User needed username.")
+		return
 	
 	added = dbinterface.adduser(userid = message.from_user.id,
 															startingrep = 100,
