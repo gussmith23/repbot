@@ -85,8 +85,8 @@ class DbInterface:
 		currentrep = self.getrep(username)
 		if currentrep == False:
 			return False
-		self.setrep(username, currentrep + amount)
-		return True
+		returnval = self.setrep(username, currentrep + amount)
+		return returnval
 		
 	def worker(self,db_path):
 	
